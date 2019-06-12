@@ -1,0 +1,2 @@
+def GetServiceInfo():
+    return None
