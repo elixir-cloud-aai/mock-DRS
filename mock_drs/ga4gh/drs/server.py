@@ -1,7 +1,7 @@
 def GetServiceInfo():
     return {"200":"ServiceInfo"},200
     
-def GetBundle(bundli_id):
+def GetBundle(bundle_id):
     return None 
 
 def GetObject(object_id):

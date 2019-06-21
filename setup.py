@@ -7,12 +7,12 @@ setup(
     name='mock-DRS',
     version='0.1.0',
     author='Elixir Europe',
-    author_email='alexander.kanitz@alumni.ethz.ch',
-    description='Flask- and MongoDB-powered GA4GH WES server',
+    author_email='vani11537@one.ducic.ac.in',
+    description='Flask- and MongoDB-powered GA4GH DRS server',
     long_description=long_description,
     long_description_content_type="text/markdown",
     license='Apache License 2.0',
-    url='https://github.com/elixir-europe/WES-ELIXIR.git',
+    url='https://github.com/elixir-europe/mock-DRS.git',
     packages=find_packages(),
     keywords=(
         'ga4gh wes workflow elixir rest restful api app server openapi '
