@@ -12,7 +12,7 @@ info:
     name: Apache 2.0
     url: 'https://raw.githubusercontent.com/ga4gh/data-repository-service-schemas/master/LICENSE'
 schemes:
-  - https
+  - http
 consumes:
   - application/json
 produces:

@@ -102,3 +102,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.idea/workspace.xml
+.idea/misc.xml
+.idea/mock-DRS.iml
+.idea/modules.xml
+.idea/vcs.xml
+mock_drs/ga4gh/.DS_Store
+mock_drs/.DS_Store
+.DS_Store
