@@ -6,8 +6,8 @@ from typing import Dict
 from flask import Flask
 from flask_pymongo import ASCENDING, PyMongo
 
-#from app.config.config_parser import get_conf
-#from app.ga4gh.drs.endpoints.get_service_info import get_service_info
+from config.config_parser import get_conf
+from app.ga4gh.drs.Endpoints.server import GetServiceInfo
 
 
 # Get logger instance
@@ -27,25 +27,23 @@ def register_mongodb(app: Flask) -> Flask:
     # Add database
     db = mongo.db[get_conf(config, 'database', 'name')]
 
-    # Add database collection for '/service-info'
-    #collection_service_info = mongo.db['service-info']
-    #logger.debug("Added database collection 'service_info'.")
+    Add database collection for '/service-info'
+    collection_service_info = mongo.db['service-info']
 
-    # Add database collection for '/runs'
-    #collection_runs = mongo.db['runs']
-    #collection_runs.create_index([
-    #        ('run_id', ASCENDING),
-    #        ('task_id', ASCENDING),
-    #    ],
-    #    unique=True,
-    #    sparse=True
-    #)
-    logger.debug("Added database collection 'runs'.")
+    #Add database collection for '/data_objects'
+    collection_data_objects = mongo.db['data_objects']
+    collection_data_objects.create_index([
+            ('bundle_id', ASCENDING),
+            ('object_id', ASCENDING),
+        ],
+        unique=True,
+        sparse=True
+    )
 
     # Add database and collections to app config
     config['database']['database'] = db
     config['database']['collections'] = dict()
-    #config['database']['collections']['runs'] = collection_runs
+    config['database']['collections']['bundle_id'] = collection_runs
     #config['database']['collections']['service_info'] = collection_service_info
     app.config = config
 
