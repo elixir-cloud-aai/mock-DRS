@@ -1,0 +1,30 @@
+# General server settings
+server:
+    host: localhost
+    port: 8888
+    debug: True
+
+# DRS service info settings
+service_info:
+    contact_info: 'https://github.com/elixir-europe/mock-DRS'
+    supported_file_system_protocols:
+        - http
+    version: ''
+
+# Location of OpenAPI specs
+openapi:
+    path: 'specs/'
+    yaml_specs: 'schema.data_repository_service.cd0186f.openapi.modified.yaml'
+
+# Database settings
+database:
+    host: 'localhost'
+    port: 27017
+    name: drs-db
+    task_id:
+        length: 6
+        charset: string.ascii_uppercase + string.digits
+
+# Endpoint parameters
+api_endpoints:
+    default_page_size: 10

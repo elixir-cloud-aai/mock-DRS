@@ -4,12 +4,8 @@ Mock Service for the GA4GH Data Repository Schema
 from config.app_config import parse_app_config
 from connexion import App
 
-from flask_pymongo import ASCENDING, PyMongo
+from database.register_mongodb import register_mongodb
 
-# from ga4gh.drs.endpoints import
-
-from connexion.resolver import RestyResolver
-from connexion import App
 
 app = App(__name__)
 config = parse_app_config("config.yaml", config_var="DRS_CONFIG")
@@ -24,26 +20,6 @@ try:
     )
 except KeyError:
     sys.exit("Config file corrupt. Execution aborted.")
-
-
-# Initialize database
-try:
-    mongo = PyMongo(
-        app.app,
-        uri="mongodb://{host}:{port}/{name}".format(
-            host=config["database"]["host"],
-            port=config["database"]["port"],
-            name=config["database"]["name"],
-        ),
-    )
-    db = mongo.db[config["database"]["name"]]
-except KeyError:
-    sys.exit("Config file corrupt. Execution aborted.")
-
-# Add database collections
-db_service_info = mongo.db["service-info"]
-db_tasks = mongo.db["tasks"]
-db_tasks.create_index([("task_id", ASCENDING)], unique=True)
 
 
 def configure_app(app):
@@ -83,10 +59,14 @@ def add_openapi(app):
     return app
 
 
-
 def main(app):
     """Initialize, configure and run server"""
+    # add api & configuration for port
     app = configure_app(app)
+
+    # Add mongo_db configuration
+    app.app = register_mongodb(app.app)
+
     app.run()
 
 
