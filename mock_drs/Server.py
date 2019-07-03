@@ -4,20 +4,18 @@ Mock Service for the GA4GH Data Repository Schema
 from config.app_config import parse_app_config
 from connexion import App
 
-from database.register_mongodb import register_mongodb
+import sys
+
+from database.register_mongodb import register_mongodb, create_mongo_client, populate_mongo_databse
 
 
 app = App(__name__)
-config = parse_app_config("config.yaml", config_var="DRS_CONFIG")
+config = parse_app_config(config_var="DRS_CONFIG")
+
 
 # use the swagger spec to define the flaskapp
 try:
-    app = App(
-        __name__,
-        specification_dir=config["openapi"]["path"],
-        swagger_ui=True,
-        swagger_json=True,
-    )
+    app = App(__name__, swagger_ui=True, swagger_json=True)
 except KeyError:
     sys.exit("Config file corrupt. Execution aborted.")
 
@@ -52,7 +50,10 @@ def add_settings(app):
 def add_openapi(app):
     """Add OpenAPI specification to connexion app instance"""
     try:
-        app.add_api(config["openapi"]["yaml_specs"], validate_responses=True)
+        app.add_api(
+            "specs/schema.data_repository_service.cd0186f.openapi.modified.yaml",
+            validate_responses=True,
+        )
     except KeyError:
         sys.exit("Config file corrupt. Execution aborted.")
 
@@ -66,9 +67,11 @@ def main(app):
 
     # Add mongo_db configuration
     app.app = register_mongodb(app.app)
+    db = create_mongo_client(app.app, config)
 
+    populate_mongo_databse(config,1)
     app.run()
 
 
-if __name__ ==  '__main__' :
+if __name__ == "__main__":
     main(app)
