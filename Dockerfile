@@ -28,13 +28,11 @@ RUN wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz \
   && cd .. \
   && python -m pip install --upgrade pip setuptools wheel virtualenv
 
-## Copy sepc files
-COPY ./ /specs
+## Copy app files
+COPY ./ /app
 
-## install requirememnts
-CMD pip install -r requirements.txt
-
-## Run connexion stub in the specs folder to make a mock
-CMD cd /specs
-## run a stub of the mock service using connexion
-## CMD connexion run --stub -d -v specs schema.data_repository_service.cd0186f.openapi.yaml
+## Install dependencies
+RUN cd /app \
+  && pip install -r requirements.txt \
+  && python setup.py develop \
+  && cd /
