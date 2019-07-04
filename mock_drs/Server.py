@@ -1,26 +1,18 @@
 """
 Mock Service for the GA4GH Data Repository Schema 
 """
-from config.app_config import parse_app_config
-from connexion import App
-
-# from ga4gh.drs.endpoints import
-
-import string
 import sys
 
-# define a flask app
+from connexion import App
+
+from config.app_config import parse_app_config
+
 app = App(__name__)
 config = parse_app_config(config_var="DRS_CONFIG")
 
 # use the swagger spec to define the flaskapp
 try:
-    app = App(
-        __name__,
-        specification_dir=config["openapi"]["path"],
-        swagger_ui=True,
-        swagger_json=True,
-    )
+    app = App(__name__, swagger_ui=True, swagger_json=True)
 except KeyError:
     sys.exit("Config file corrupt. Execution aborted.")
 
@@ -55,22 +47,19 @@ def add_settings(app):
 def add_openapi(app):
     """Add OpenAPI specification to connexion app instance"""
     try:
-        app.add_api(config["openapi"]["yaml_specs"], validate_responses=True)
+        app.add_api(config["openapi"]["path"], validate_responses=True)
     except KeyError:
         sys.exit("Config file corrupt. Execution aborted.")
 
     return app
 
-# to-do:
-# configure db for DRS instances
-
 
 def main(app):
     """Initialize, configure and run server"""
+    # add api & configuration for port
     app = configure_app(app)
     app.run()
 
 
 if __name__ == "__main__":
-
     main(app)
