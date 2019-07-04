@@ -1,12 +1,11 @@
 """
 Mock Service for the GA4GH Data Repository Schema 
 """
-from config.app_config import parse_app_config
-from connexion import App
-
 import sys
 
-from database.register_mongodb import register_mongodb, create_mongo_client
+from connexion import App
+
+from config.app_config import parse_app_config
 
 app = App(__name__)
 config = parse_app_config(config_var="DRS_CONFIG")
