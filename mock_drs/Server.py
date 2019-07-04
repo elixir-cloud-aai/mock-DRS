@@ -6,7 +6,11 @@ from connexion import App
 
 import sys
 
-from database.register_mongodb import register_mongodb, create_mongo_client, populate_mongo_databse
+from database.register_mongodb import (
+    register_mongodb,
+    create_mongo_client,
+    populate_mongo_databse,
+)
 
 
 app = App(__name__)
@@ -67,9 +71,9 @@ def main(app):
 
     # Add mongo_db configuration
     app.app = register_mongodb(app.app)
-    db = create_mongo_client(app.app, config)
+    mongo_client = create_mongo_client(app.app, config)
 
-    populate_mongo_databse(config,1)
+    populate_mongo_databse(app.app, config)
     app.run()
 
 
