@@ -11,7 +11,7 @@ import sys
 
 # define a flask app
 app = App(__name__)
-config = parse_app_config("config.yaml", config_var="DRS_CONFIG")
+config = parse_app_config(config_var="DRS_CONFIG")
 
 # use the swagger spec to define the flaskapp
 try:
