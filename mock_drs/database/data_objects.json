@@ -1,0 +1,26 @@
+{
+  "id": "a001",
+  "name": "",
+  "size": "16700000",
+  "created": "",
+  "updated": "",
+  "version": "38",
+  "mime_type": "application/json",
+  "checksums": [
+    {
+      "checksum": "",
+      "type": "None"
+    }
+  ],
+  "access_methods": [
+    {
+      "type": "ftp",
+      "access_url": {
+        "url": "ftp://ftp.ensembl.org/pub/release-96/fasta/homo_sapiens/dna//Homo_sapiens.GRCh38.dna.chromosome.19.fa.gz",
+        "headers": {
+          "Authorization": "None"
+        }
+      }
+    }
+  ]
+}

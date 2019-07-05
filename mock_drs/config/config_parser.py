@@ -10,7 +10,6 @@ import yaml
 from addict import Dict
 
 
-
 class YAMLConfigParser(Dict):
     """Config parser for YAML files.
     Allows sequential updating of configs via file paths and environment
@@ -159,4 +158,7 @@ def get_conf(
         types=(dict, list),
         invert_types=True,
         touchy=touchy,
+
     )
+
+  
