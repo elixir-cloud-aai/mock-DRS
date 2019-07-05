@@ -1,8 +1,9 @@
 """Function for Registering MongoDB with a Flask app instance."""
 
-import logging
-from typing import Dict
 import json
+import logging
+import os
+from typing import Dict
 
 from flask import Flask
 from flask_pymongo import ASCENDING, PyMongo
@@ -51,10 +52,18 @@ def create_mongo_client(app: Flask, config: Dict):
     return mongo
 
 
-def populate_mongo_databse(app: Flask, config: Dict):
+def populate_mongo_database(app: Flask, config: Dict):
     """Populate the DRS  with data objects."""
     database = create_mongo_client(app=app, config=app.config)
-    db_object = json.loads(open("database/data_objects.json", "r").read())
+    data_objects_path = os.path.abspath(
+        os.path.join(
+            os.path.dirname(
+                os.path.realpath(__file__)
+            ),
+            'data_objects.json'
+        )
+    )
+    db_object = json.loads(open(data_objects_path, "r").read())
     try:
         database.db.data_objects.insert(db_object)
     except pymongo.errors.DuplicateKeyError:
