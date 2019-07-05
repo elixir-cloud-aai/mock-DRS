@@ -63,6 +63,7 @@ def populate_mongo_database(app: Flask, config: Dict):
             'data_objects.json'
         )
     )
+    database = create_mongo_client(app=app, config=app.config)
     db_object = json.loads(open(data_objects_path, "r").read())
     try:
         database.db.data_objects.insert(db_object)
@@ -73,5 +74,5 @@ def populate_mongo_database(app: Flask, config: Dict):
         # del db_object["id"]
         # database.db.data_objects.update({"id": obj_id}, db_object, upsert=True)
         # print("Duplicate, not updated")
-        print(database.db.drs_db.data_objects.distinct("id"))
+        print(database.db.data_objects.distinct("id"))
     # choice()
