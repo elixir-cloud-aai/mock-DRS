@@ -1,13 +1,19 @@
-from flask import current_app
-
-import json
 import string
+import json
+
+from flask import current_app
 
 from database.register_mongodb import create_mongo_client
 
 
 def GetServiceInfo():
-    return {"200": "ServiceInfo"}, 200
+    return {
+        "version": "string",
+        "title": "string",
+        "description": "string",
+        "contact": {},
+        "license": {},
+    }
 
 
 def GetBundle(bundle_id):
