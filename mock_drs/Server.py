@@ -10,7 +10,7 @@ from config.app_config import parse_app_config
 from database.register_mongodb import (
     register_mongodb,
     create_mongo_client,
-    populate_mongo_databse,
+    populate_mongo_database,
 )
 
 
@@ -77,7 +77,7 @@ def main(app):
     mongo_client = create_mongo_client(app.app, config)
    
     #Add objects to the database
-    populate_mongo_databse(app.app, config)
+    populate_mongo_database(app.app, config)
     
     #run app
     app.run()
