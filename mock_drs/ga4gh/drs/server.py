@@ -1,5 +1,4 @@
 import string
-import json
 
 from flask import current_app
 
@@ -13,7 +12,7 @@ def GetServiceInfo():
         "description": "string",
         "contact": {},
         "license": {},
-    }
+    }, 200
 
 
 def GetBundle(bundle_id):
@@ -28,6 +27,6 @@ def GetObject(object_id: string):
     return obj, 200
 
 
-def GetAccessURL(object_id, access_url):
+def GetAccessURL(object_id, access_id):
     # to-do : implement this endpoint
     return None
