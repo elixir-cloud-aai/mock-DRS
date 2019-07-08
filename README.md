@@ -1,12 +1,12 @@
-[Connexion](https://github.com/zalando/connexion)-based mockup service implementing parts of the GA4GH Task Execution
+[Connexion](https://github.com/zalando/connexion)-based mockup service implementing parts of the GA4GH Data Repository
 Service API schema. The service was developed to implement and test [TEStribute](https://github.com/elixir-europe/TEStribute),
-a task distribution logic package for TES instances. It features an extended
-TES specification to provide parameters required for the model underlying the
+a task distribution logic package for TES instances. It features a mock
+DRS specification to provide parameters required for the model underlying the
 task distribution logic.
 
 ## Implementation
 
-Not that only those parts of the service are implemented that are required for
+Note that only those parts of the service are implemented that are required for
 developing, testing and debugging [TEStribute](https://github.com/elixir-europe/TEStribute).
 For all other endpoints only stubs are implemented that return the most basic
 valid response (typically an empty JSON object).
