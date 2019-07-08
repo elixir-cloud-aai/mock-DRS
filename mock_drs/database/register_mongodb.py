@@ -4,15 +4,15 @@ import json
 import logging
 import os
 from typing import Dict
-from random import choice, randint
 
 from flask import Flask
 from flask_pymongo import ASCENDING, PyMongo
 
-from pymongo import InsertOne, DeleteOne, ReplaceOne
-from pymongo.errors import DuplicateKeyError
+import pymongo
 
 from config.config_parser import get_conf
+
+from random import choice
 
 
 def register_mongodb(app: Flask) -> Flask:
@@ -54,22 +54,25 @@ def create_mongo_client(app: Flask, config: Dict):
 
 def populate_mongo_database(app: Flask, config: Dict):
     """Populate the DRS  with data objects."""
+    database = create_mongo_client(app=app, config=app.config)
     data_objects_path = os.path.abspath(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), "data_objects.json")
+        os.path.join(
+            os.path.dirname(
+                os.path.realpath(__file__)
+            ),
+            'data_objects.json'
+        )
     )
     database = create_mongo_client(app=app, config=app.config)
-    data = json.loads(open(data_objects_path, "r").read())
-    i = 0
-    entries = randint(6, 8)
-    while i < entries:
-        data_object = choice(data)
-        try:
-            database.db.data_objects.insert(data_object)
-        except DuplicateKeyError:
-            database.db.data_objects.delete_one({"id": data_object["id"]})
-            database.db.data_objects.update_one(
-                {"id": data_object["id"]}, {"$setOnInsert": data_object}, upsert=True
-            )
-        print("duplicate updated:", data_object["id"])
-        print("database contents are :", database.db.data_objects.distinct("id"))
-        i += 1
+    db_object = json.loads(open(data_objects_path, "r").read())
+    try:
+        database.db.data_objects.insert(db_object)
+    except pymongo.errors.DuplicateKeyError:
+        # to-do:
+        #   remove and add object
+        # obj_id = db_object["id"]
+        # del db_object["id"]
+        # database.db.data_objects.update({"id": obj_id}, db_object, upsert=True)
+        # print("Duplicate, not updated")
+        print(database.db.data_objects.distinct("id"))
+    # choice()
