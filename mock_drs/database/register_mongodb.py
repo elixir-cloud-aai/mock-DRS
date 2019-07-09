@@ -52,6 +52,11 @@ def create_mongo_client(app: Flask, config: Dict):
     return mongo
 
 
+def clear_mongo_database(database):
+    for id in database.distinct("id"):
+        database.delete_one({"id": id})
+
+
 def populate_mongo_database(app: Flask, config: Dict):
     """Populate the DRS  with data objects."""
     data_objects_path = os.path.abspath(
@@ -59,17 +64,16 @@ def populate_mongo_database(app: Flask, config: Dict):
     )
     database = create_mongo_client(app=app, config=app.config)
     data = json.loads(open(data_objects_path, "r").read())
-    i = 0
-    entries = randint(6, 8)
-    while i < entries:
-        data_object = choice(data)
+    clear_mongo_database(database.db.data_objects)
+    database_contents = config["database"]["objects"]
+    data = {x["id"]: x for x in data}
+    for object_id in database_contents:
         try:
-            database.db.data_objects.insert(data_object)
+            database.db.data_objects.insert(data[object_id])
         except DuplicateKeyError:
-            database.db.data_objects.delete_one({"id": data_object["id"]})
+            database.db.data_objects.delete_one({"id": object_id})
             database.db.data_objects.update_one(
-                {"id": data_object["id"]}, {"$setOnInsert": data_object}, upsert=True
+                {"id": object_id}, {"$setOnInsert": data[object_id]}, upsert=True
             )
-        print("duplicate updated:", data_object["id"])
+        print("duplicate updated:", object_id)
         print("database contents are :", database.db.data_objects.distinct("id"))
-        i += 1

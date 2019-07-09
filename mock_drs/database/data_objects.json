@@ -93,7 +93,7 @@
     ],
     "access_methods": [
       {
-        "type": "",
+        "type": "ftp",
         "access_url": {
           "url": "ftp://ftp.ensembl.org/pub/release-81/bed/ensembl-compara/11_teleost_fish.gerp_constrained_elements/README",
           "headers":  [

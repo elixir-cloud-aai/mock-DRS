@@ -20,4 +20,3 @@ services:
       - ../data/db:/data/db
     expose:
       - "27017"
-
