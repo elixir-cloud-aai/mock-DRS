@@ -119,7 +119,7 @@
     ],
     "access_methods": [
       {
-        "type": "",
+        "type": "ftp",
         "access_url": {
           "url": "ftp://ftp.ensembl.org/pub/release-81/bed/ensembl-compara/39_eutherian_mammals.gerp_constrained_elements/gerp_constrained_elements.ailuropoda_melanoleuca.bed.gz",
           "headers": [
@@ -171,7 +171,7 @@
     ],
     "access_methods": [
       {
-        "type": "frp",
+        "type": "ftp",
         "access_url": {
           "url": "ftp://ftp.ensembl.org/pub/release-81/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz",
           "headers": [
