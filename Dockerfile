@@ -29,10 +29,16 @@ RUN wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz \
   && python -m pip install --upgrade pip setuptools wheel virtualenv
 
 ## Copy app files
+COPY ./requirements.txt /
+
+## Install dependencies
+RUN pip install -r requirements.txt
+
+## Copy app files
 COPY ./ /app
 
 ## Install dependencies
 RUN cd /app \
-  && pip install -r requirements.txt \
   && python setup.py develop \
   && cd /
+
