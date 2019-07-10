@@ -61,7 +61,7 @@ def add_openapi(app):
 
     except KeyError:
         sys.exit("Config file corrupt. Execution aborted.")
-        
+
     return app
 
 
@@ -72,17 +72,16 @@ def main(app):
 
     # Add mongoDB configuration
     app.app = register_mongodb(app.app)
-   
-    #Create a client for the mongoDB instance
+
+    # Create a client for the mongoDB instance
     mongo_client = create_mongo_client(app.app, config)
-   
-    #Add objects to the database
+
+    # Add objects to the database
     populate_mongo_database(app.app, config)
-    
-    #run app
+
+    # run app
     app.run()
 
 
 if __name__ == "__main__":
     main(app)
-

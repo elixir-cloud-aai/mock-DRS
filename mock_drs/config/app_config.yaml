@@ -20,6 +20,11 @@ database:
     host: 'mongo'
     port: 27017
     name: drs-db
-    object_id:
-        length: 4
-        charset: string.ascii_uppercase + string.digits
+    objects:
+        - 'a001'
+        - 'a002'
+        - 'a004'
+        - 'a006'
+        - 'a008'
+        - 'a010'
+
