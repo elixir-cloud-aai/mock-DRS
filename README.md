@@ -11,9 +11,12 @@ developing, testing and debugging [TEStribute](https://github.com/elixir-europe/
 For all other endpoints only stubs are implemented that return the most basic
 valid response (typically an empty JSON object).
 
-### Modified DRS specs
+### The DRS Database
 
-Coming soon...
+The DRS is populated with objects from the data_objects.json file and the id's of the objects that are loaded onto it 
+need to be specified in the ../config/app_config.yaml file. Only objects mentioned in the the config are loaded. Upon 
+every run of the service the database is emptied and repopulated according to the config.
+
 
 ## Usage
 
