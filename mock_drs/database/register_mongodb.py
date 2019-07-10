@@ -70,10 +70,13 @@ def populate_mongo_database(app: Flask, config: Dict):
     for object_id in database_contents:
         try:
             database.db.data_objects.insert(data[object_id])
+            print("entry added:", object_id)
         except DuplicateKeyError:
             database.db.data_objects.delete_one({"id": object_id})
             database.db.data_objects.update_one(
                 {"id": object_id}, {"$setOnInsert": data[object_id]}, upsert=True
             )
-        print("duplicate updated:", object_id)
+            print("duplicate updated:", object_id)
+        except KeyError:
+            print("object not found, skipped:", object_id)
         print("database contents are :", database.db.data_objects.distinct("id"))
