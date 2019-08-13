@@ -1,22 +1,27 @@
-[Connexion](https://github.com/zalando/connexion)-based mockup service implementing parts of the GA4GH Data Repository
-Service API schema. The service was developed to implement and test [TEStribute](https://github.com/elixir-europe/TEStribute),
-a task distribution logic package for TES instances. It features a mock
-DRS specification to provide parameters required for the model underlying the
-task distribution logic.
+[Connexion]-based mockup service implementing parts of the [modified GA4GH Data Repository
+Service API schema](mock_drs/specs/schema.data_repository_service.cd0186f.openapi.modified.yaml). The service was 
+developed to implement and test [TEStribute],a task distribution logic package for TES instances. It features a 
+mock DRS specification to provide parameters required for the model underlying the task distribution logic.
 
 ## Implementation
 
-Note that only those parts of the service are implemented that are required for
-developing, testing and debugging [TEStribute](https://github.com/elixir-europe/TEStribute).
-For all other endpoints only stubs are implemented that return the most basic
-valid response (typically an empty JSON object).
+Note that only those parts of the service are implemented that are required for developing, testing and debugging 
+[TEStribute](https://github.com/elixir-europe/TEStribute).
+For all other endpoints only stubs are implemented that return the most basic valid response (typically an empty JSON 
+object).
+
+An important assumption that made during the deployment of this mock service is that the service assumes the 
+consideration of the *object-id* field as a unique identifier across DRS instances. 
+
+An original copy of the DRS schema will be available at all times [here](mock_drs/specs/schema.data_repository_service.cd0186f.openapi.yaml)
+as a reference along with the [modified schema](mock_drs/specs/schema.data_repository_service.cd0186f.openapi.modified.yaml) which is used.
 
 ### The DRS Database
 
-The DRS is populated with objects from the data_objects.json file and the id's of the objects that are loaded onto it 
-need to be specified in the ../config/app_config.yaml file. Only objects mentioned in the the config are loaded. Upon 
-every run of the service the database is emptied and repopulated according to the config.
-
+The DRS is populated with objects from the [../database/data_objects.json](mock_drs/database/data_objects.json) file 
+and the id's of the objects that are loaded onto it need to be specified in the [../config/app_config.yaml](mock_drs/config/app_config.yaml) file. 
+Only objects mentioned in the the [../database/data_objects.json](mock_drs/database/data_objects.json) file are available
+to the DRS service. Again, the database relies on the uniqueness of the drs_id's of the objects.
 
 ## Usage
 
@@ -97,3 +102,9 @@ python setup.py develop
 # Run service
 python mock_drs/Server.py
 ```
+*Note* you will also need to change the config file to support this by modifying the mongodb port from ```mongo``` to 
+```localhost```
+
+
+[Connexion]:https://github.com/zalando/connexion
+[TEStribute]:https://github.com/elixir-europe/TEStribute
