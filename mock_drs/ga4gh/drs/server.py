@@ -3,6 +3,7 @@ import string
 from flask import current_app
 
 from database.register_mongodb import create_mongo_client
+from database.db_utils import clear_mongo_database, insert_objects
 
 
 def GetServiceInfo():
@@ -46,6 +47,6 @@ def GetAccessURL(object_id, access_id):
 
 
 def UpdateDatabase(body):
-    # TO-DO:
-    #   implement endpoint
-    return {200:[]}
+
+    current_objects = insert_objects(body["clear"], body["objects"])
+    return {200:current_objects}

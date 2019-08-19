@@ -5,6 +5,7 @@ import os
 from typing import List, Dict
 
 from flask import Flask
+from flask import current_app
 from flask_pymongo import ASCENDING, PyMongo
 
 from pymongo import InsertOne, DeleteOne, ReplaceOne
@@ -30,26 +31,34 @@ def clear_mongo_database(database):
         database.delete_one({"id": id})
 
 
-def insert_objects(objects_list:List):
+def insert_objects(clear: bool, objects_list: List):
     # TO-DO :
-    #   add option to post a dict to the database here
+    #   fix print while docker image is used
 
-    database = create_mongo_client(app=Flask.current_app, config=Flask.current_app.config)
+    database = create_mongo_client(app= current_app, config= current_app.config).db.data_objects
+
+    if clear:
+        clear_mongo_database(database)
+
     data_objects_path = os.path.abspath(
         os.path.join(os.path.dirname(os.path.realpath(__file__)), "data_objects.json")
     )
-    data = json.loads(open(data_objects_path, "r").read())
 
+    data = json.loads(open(data_objects_path, "r").read())
+    data = {x["id"]: x for x in data}
     for object_id in objects_list:
         try:
-            database.db.data_objects.insert(data[object_id])
+            database.insert(data[object_id])
             print("entry added:", object_id)
         except DuplicateKeyError:
-            database.db.data_objects.delete_one({"id": object_id})
-            database.db.data_objects.update_one(
+            database.delete_one({"id": object_id})
+            database.update_one(
                 {"id": object_id}, {"$setOnInsert": data[object_id]}, upsert=True
             )
             print("duplicate updated:", object_id)
         except KeyError:
             print("object not found, skipped:", object_id)
-        print("database contents are :", database.db.data_objects.distinct("id"))
+
+    objects = database.distinct("id")
+    print("database contents are :", objects)
+    return objects
