@@ -9,10 +9,11 @@ from random import choice, randint
 from flask import Flask
 from flask_pymongo import ASCENDING, PyMongo
 
-from pymongo import InsertOne, DeleteOne, ReplaceOne
 from pymongo.errors import DuplicateKeyError
 
 from config.config_parser import get_conf
+
+from database.db_utils import clear_mongo_database, create_mongo_client
 
 
 def register_mongodb(app: Flask) -> Flask:
@@ -38,23 +39,6 @@ def register_mongodb(app: Flask) -> Flask:
     app.config = config
 
     return app
-
-
-def create_mongo_client(app: Flask, config: Dict):
-    """Instantiate MongoDB client."""
-    uri = "mongodb://{host}:{port}/{name}".format(
-        host=get_conf(config, "database", "host"),
-        port=get_conf(config, "database", "port"),
-        name=get_conf(config, "database", "name"),
-    )
-
-    mongo = PyMongo(app, uri=uri)
-    return mongo
-
-
-def clear_mongo_database(database):
-    for id in database.distinct("id"):
-        database.delete_one({"id": id})
 
 
 def populate_mongo_database(app: Flask, config: Dict):

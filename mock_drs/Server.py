@@ -1,7 +1,6 @@
 """
 Mock Service for the GA4GH Data Repository Schema 
 """
-
 import sys
 
 from connexion import App
@@ -12,6 +11,8 @@ from database.register_mongodb import (
     create_mongo_client,
     populate_mongo_database,
 )
+
+from specsynthase.specbuilder import SpecBuilder
 
 
 app = App(__name__)
@@ -54,11 +55,10 @@ def add_settings(app):
 def add_openapi(app):
     """Add OpenAPI specification to connexion app instance"""
     try:
-        app.add_api(
-            "specs/schema.data_repository_service.cd0186f.openapi.modified.yaml",
-            validate_responses=True,
-        )
+        spec = SpecBuilder().add_spec(config["openapi"]["path"])\
+               .add_spec(config["openapi"]["updates"])
 
+        app.add_api(spec, validate_responses=True)
     except KeyError:
         sys.exit("Config file corrupt. Execution aborted.")
 

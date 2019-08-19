@@ -13,7 +13,8 @@ service_info:
 
 # Location of OpenAPI specs
 openapi:
-    path: 'specs/schema.data_repository_service.cd0186f.openapi.modified.yaml'
+    path: 'mock_drs/specs/schema.data_repository_service.cd0186f.openapi.modified.yaml'
+    updates : 'mock_drs/specs/db_update_spec.yaml'
 
 # Database settings
 database:
@@ -27,4 +28,3 @@ database:
         - 'a006'
         - 'a008'
         - 'a010'
-

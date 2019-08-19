@@ -43,3 +43,9 @@ def GetAccessURL(object_id, access_id):
     # create the response
     response = obj["access_methods"][0]["access_url"]
     return response, 200
+
+
+def UpdateDatabase(body):
+    # TO-DO:
+    #   implement endpoint
+    return {200:[]}
