@@ -141,7 +141,7 @@ endpoint is defined in the [config specifications]:
     /update-db:
     post:
       summary: Object id's in the array that need to be added to the db
-      operationId: updateDatabaseObjects
+      operationId: UpdateDatabaseObjects
       consumes:
         - application/json
       produces:
@@ -151,13 +151,13 @@ endpoint is defined in the [config specifications]:
           in: body
           description: ''
           schema:
-            $ref: '#/definitions/UpdateObjects'
+            $ref: '#/definitions/UpdateObject'
           required: true
       responses:
         200:
           description: "200 response"
           schema:
-              $ref: '#/definitions/UpdateObjects'
+              $ref: '#/definitions/UpdatedDB'
       tags:
         - DataRepositoryService
       x-swagger-router-controller: ga4gh.drs.server
@@ -166,16 +166,150 @@ endpoint is defined in the [config specifications]:
 It relies on the following models:
 
 ```yaml
-  UpdateObjects:
+  UpdatedDB:
     type: object
     properties:
-      clear:
-        type: boolean
       objects:
         type: array
         items:
           type: string
+  UpdateObject:
+    type: object
+    properties:
+      clear:
+        type: boolean
+      data_objects:
+        type: array
+        items:
+          $ref: '#/definitions/Object'
 ```
+the ```#/definitions/Object``` is a reference to the Object model in the [modified DRS specification]
+shown here:
+
+```yaml
+Object:
+    type: object
+    required: ['id', 'size', 'created', 'checksums', 'access_methods']
+    properties:
+      id:
+        type: string
+        description: |-
+          An identifier unique to this Data Object.
+      name:
+        type: string
+        description: |-
+          A string that can be used to name a Data Object.
+      size:
+        type: integer
+        format: int64
+        description: |-
+          The object size in bytes.
+      created:
+        type: string
+        format: date-time
+        description: |-
+          Timestamp of object creation in RFC3339.
+      updated:
+        type: string
+        format: date-time
+        description: >-
+          Timestamp of Object update in RFC3339, identical to create timestamp in systems
+          that do not support updates.
+      version:
+        type: string
+        description: |-
+          A string representing a version.
+      mime_type:
+        type: string
+        description: |-
+          A string providing the mime-type of the Data Object.
+        example:
+          application/json
+      checksums:
+        type: array
+        items:
+          $ref: '#/definitions/Checksum'
+        description: |-
+          The checksum of the Data Object. At least one checksum must be provided.
+      access_methods:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/definitions/AccessMethod'
+        description: |-
+          The list of access methods that can be used to fetch the Data Object.
+      description:
+        type: string
+        description: |-
+          A human readable description of the Data Object.
+      aliases:
+        type: array
+        items:
+          type: string
+        description: >-
+          A list of strings that can be used to find other metadata 
+          about this Data Object from external metadata sources. These
+          aliases can be used to represent the Data Object's secondary
+          accession numbers or external GUIDs.
+  AccessMethod:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        type: string
+        enum:
+        - s3
+        - gs
+        - ftp
+        - gsiftp
+        - globus
+        - htsget
+        - https
+        - file
+        description: >-
+          Type of the access method.
+      access_url:
+        $ref: '#/definitions/AccessURL'
+        description: >-
+          An `AccessURL` that can be used to fetch the actual object bytes.
+          Note that at least one of `access_url` and `access_id` must be provided.
+      access_id:
+        type: string
+        description: >-
+          An arbitrary string to be passed to the `/access` method to get an `AccessURL`.
+          This string must be unique per object.
+          Note that at least one of `access_url` and `access_id` must be provided.
+      region:
+        type: string
+        description: >-
+          Name of the region in the cloud service provider that the object belongs to.
+        example:
+          us-east-1
+  Checksum:
+    type: object
+    required:
+      - checksum
+    properties:
+      checksum:
+        type: string
+        description: 'The hex-string encoded checksum for the data'
+      type:
+        type: string
+        description: |-
+          The digest method used to create the checksum. If left unspecified md5
+          will be assumed.
+
+          possible values:
+          md5               # most blob stores provide a checksum using this
+          etag              # multipart uploads to blob stores
+          sha256
+          sha512
+```
+all other objects involved can be found in the [modified DRS specification] as well as the [original 
+DRS specifications](mock_drs/specs/schema.data_repository_service.cd0186f.openapi.yaml)
+
+
 [DRS-cli] can be used to update the task info parameters.
 
 > Note that while the `/update-db` endpoint can be accessed via the same
