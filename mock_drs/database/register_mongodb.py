@@ -1,19 +1,17 @@
 """Function for Registering MongoDB with a Flask app instance."""
 
 import json
-import logging
 import os
 from typing import Dict
-from random import choice, randint
 
 from flask import Flask
 from flask_pymongo import ASCENDING, PyMongo
 
 from pymongo.errors import DuplicateKeyError
 
-from config.config_parser import get_conf
+from mock_drs.config.config_parser import get_conf
 
-from database.db_utils import clear_mongo_database, create_mongo_client
+from mock_drs.database.db_utils import clear_mongo_database, create_mongo_client
 
 
 def register_mongodb(app: Flask) -> Flask:

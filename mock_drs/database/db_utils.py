@@ -11,7 +11,7 @@ from flask_pymongo import ASCENDING, PyMongo
 from pymongo import InsertOne, DeleteOne, ReplaceOne
 from pymongo.errors import DuplicateKeyError
 
-from config.config_parser import get_conf
+from mock_drs.config.config_parser import get_conf
 
 
 def create_mongo_client(app: Flask, config: Dict):
@@ -32,8 +32,6 @@ def clear_mongo_database(database):
 
 
 def insert_objects(clear: bool, objects_list: List):
-    # TO-DO :
-    #   fix print while docker image is used
 
     database = create_mongo_client(app= current_app, config= current_app.config).db.data_objects
 

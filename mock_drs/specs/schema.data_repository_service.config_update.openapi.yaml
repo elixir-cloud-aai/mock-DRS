@@ -1,8 +1,8 @@
 paths:
-  /UpdateDatabase:
+  /update-db:
     post:
       summary: Object id's in the array that need to be added to the db
-      operationId: UpdateDatabase
+      operationId: updateDatabaseObjects
       consumes:
         - application/json
       produces:

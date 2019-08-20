@@ -1,18 +1,16 @@
 """
 Mock Service for the GA4GH Data Repository Schema 
 """
+import os
 import sys
 
 from connexion import App
 
-from config.app_config import parse_app_config
-from database.register_mongodb import (
-    register_mongodb,
-    create_mongo_client,
-    populate_mongo_database,
-)
-
 from specsynthase.specbuilder import SpecBuilder
+
+from mock_drs.config.app_config import parse_app_config
+from mock_drs.database.register_mongodb import register_mongodb, populate_mongo_database
+from mock_drs.database.db_utils import create_mongo_client
 
 
 app = App(__name__)
@@ -55,13 +53,16 @@ def add_settings(app):
 def add_openapi(app):
     """Add OpenAPI specification to connexion app instance"""
     try:
-        spec = SpecBuilder().add_spec(config["openapi"]["path"])\
-               .add_spec(config["openapi"]["updates"])
-
-        app.add_api(spec, validate_responses=True)
+        specs = SpecBuilder()\
+                .add_spec(config["openapi"]["drs"])\
+                .add_spec(config["openapi"]["db_update"])
+        app.add_api(
+            specs,
+            validate_responses=True,
+            strict_validation=True,
+        )
     except KeyError:
         sys.exit("Config file corrupt. Execution aborted.")
-
     return app
 
 
