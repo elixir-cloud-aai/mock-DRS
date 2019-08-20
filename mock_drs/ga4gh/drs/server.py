@@ -1,8 +1,10 @@
 import string
+import sys
 
 from flask import current_app
 
-from database.register_mongodb import create_mongo_client
+from mock_drs.database.register_mongodb import create_mongo_client
+from mock_drs.database.db_utils import insert_objects
 
 
 def GetServiceInfo():
@@ -43,3 +45,9 @@ def GetAccessURL(object_id, access_id):
     # create the response
     response = obj["access_methods"][0]["access_url"]
     return response, 200
+
+
+def updateDatabaseObjects(body):
+
+    current_objects = insert_objects(body["clear"], body["objects"])
+    return {200: current_objects}

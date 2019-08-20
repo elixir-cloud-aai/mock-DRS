@@ -1,8 +1,12 @@
-
+"""
+App config parser modules
+modules to set a config dict across the app
+"""
 import os
 from typing import Optional
 
-from config.config_parser import YAMLConfigParser
+from mock_drs.config.config_parser import YAMLConfigParser
+
 
 def parse_app_config(
     default_path: str = os.path.abspath(
