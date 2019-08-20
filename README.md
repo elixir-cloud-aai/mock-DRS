@@ -200,7 +200,7 @@ their major and minor versions match.
 
 ## License
 
-This project is covered by the [Apache License 2.0] also available [shippied
+This project is covered by the [Apache License 2.0] also available [shipped
 with this repository](LICENSE).
 
 ## Contact
