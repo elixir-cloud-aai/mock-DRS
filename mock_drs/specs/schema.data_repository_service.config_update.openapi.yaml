@@ -2,7 +2,7 @@ paths:
   /update-db:
     post:
       summary: Object id's in the array that need to be added to the db
-      operationId: UpdateDatabaseObjects
+      operationId: updateDatabaseObjects
       consumes:
         - application/json
       produces:
@@ -12,30 +12,23 @@ paths:
           in: body
           description: ''
           schema:
-            $ref: '#/definitions/UpdateObject'
+            $ref: '#/definitions/UpdateObjects'
           required: true
       responses:
         200:
           description: "200 response"
           schema:
-              $ref: '#/definitions/UpdatedDB'
+              $ref: '#/definitions/UpdateObjects'
       tags:
         - DataRepositoryService
       x-swagger-router-controller: ga4gh.drs.server
 definitions:
-  UpdatedDB:
+  UpdateObjects:
     type: object
     properties:
+      clear:
+        type: boolean
       objects:
         type: array
         items:
           type: string
-  UpdateObject:
-    type: object
-    properties:
-      clear_db:
-        type: boolean
-      data_objects:
-        type: array
-        items:
-          $ref: '#/definitions/Object'
