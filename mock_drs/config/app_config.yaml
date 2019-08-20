@@ -19,7 +19,7 @@ openapi:
 
 # Database settings
 database:
-    host: 'mongo'
+    host: 'localhost'
     port: 27017
     name: drs-db
     objects:

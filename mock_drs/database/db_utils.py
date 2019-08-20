@@ -42,20 +42,18 @@ def insert_objects(clear: bool, objects_list: List):
         os.path.join(os.path.dirname(os.path.realpath(__file__)), "data_objects.json")
     )
 
-    data = json.loads(open(data_objects_path, "r").read())
-    data = {x["id"]: x for x in data}
-    for object_id in objects_list:
+    for object in objects_list:
         try:
-            database.insert(data[object_id])
-            print("entry added:", object_id)
+            database.insert(object)
+            print("entry added:", object["id"])
         except DuplicateKeyError:
-            database.delete_one({"id": object_id})
+            database.delete_one({"id": object["id"]})
             database.update_one(
-                {"id": object_id}, {"$setOnInsert": data[object_id]}, upsert=True
+                {"id": object["id"]}, {"$setOnInsert": object}, upsert=True
             )
-            print("duplicate updated:", object_id)
+            print("duplicate updated:", object["id"])
         except KeyError:
-            print("object not found, skipped:", object_id)
+            print("object not found, skipped:", object["id"])
 
     objects = database.distinct("id")
     print("database contents are :", objects)
