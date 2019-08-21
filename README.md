@@ -206,12 +206,12 @@ Object:
           The object size in bytes.
       created:
         type: string
-        format: date-time
+        #format: date-time
         description: |-
           Timestamp of object creation in RFC3339.
       updated:
         type: string
-        format: date-time
+        #format: date-time
         description: >-
           Timestamp of Object update in RFC3339, identical to create timestamp in systems
           that do not support updates.
@@ -306,9 +306,10 @@ Object:
           sha256
           sha512
 ```
-all other objects involved can be found in the [modified DRS specification] as well as the [original 
-DRS specifications](mock_drs/specs/schema.data_repository_service.cd0186f.openapi.yaml)
-
+All other objects involved can be found in the [modified DRS specification] as well as the [original 
+DRS specifications](mock_drs/specs/schema.data_repository_service.cd0186f.openapi.yaml), A minor 
+modification that needs to be made to the schema to allow the bravado models to validate the model
+is the date-time is commented out to allow passing all formats at the moment. 
 
 [DRS-cli] can be used to update the task info parameters.
 
