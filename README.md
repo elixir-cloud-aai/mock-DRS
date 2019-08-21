@@ -1,13 +1,11 @@
 # mock-DRS
 [Connexion]-based mockup service implementing parts of the GA4GH [Data Repository
 Service] (DRS) API schema. The service was developed to implement and test
-[TEStribute], a task distribution logic package for TES instances. It features
-an [extended TES specification] to provide parameters required for the model
-underlying the task distribution logic.
+[TEStribute], a task distribution logic package for TES instances.
 
 ## Usage
 
-Once deployed and started ([see below](#Deployment)), the service is available here:
+Once deployed and started ([see below](#Deployment)), the service is available at:  
 <http://localhost:9101/ga4gh/drs/v1/>
 
 You can explore the service via the Swagger UI:
@@ -25,7 +23,7 @@ wget http://localhost:9101/ga4gh/drs/v1/swagger.json
 > Note that host and port can be set manually in the [config] file. In that
 > case, the values in the URLs above need to be replaced as well.
 
-The client [DRS-cli] to send requests to the service.
+The client [DRS-cli] can be used to send requests to the service.
 
  
 ## Deployment
@@ -38,17 +36,17 @@ In both cases, the repository first needs to be cloned with:
 ```bash
 git clone git@github.com:elixir-europe/mock-DRS.git
 ```
-Afterwards traverse to the repository's root directory with :
+Afterwards traverse to the repository's root directory:
 
 ```bash
 cd mock-DRS
 ```
 
-### Containerised Deployment 
+### Containerized Deployment 
 > "Production-like" containerized deployment without HTTP server/load balancer
 > etc.
 
-#### Requirements
+#### Requirements (containerized deployment)
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (tested with version 2.17.1)
 - [Docker](https://docs.docker.com/install/) (tested with version 18.09.6)
@@ -74,12 +72,12 @@ docker-compose logs
 docker-compose down
 ```
 
-### Non-dockerized
+### Non-containerized deployment
 
 > Deployment for local development without containers, HTTP server/load
 > balancer etc.
 
-#### Requirements
+#### Requirements (non-containerized deployment)
 
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) (tested with version 2.17.1)
 - [Python](https://www.python.org/downloads/) (tested with versions 2.7.15+ & 3.6.8)
@@ -92,10 +90,13 @@ docker-compose down
 # Set up Python virtual environment
 virtualenv -p `which python3` venv
 source venv/bin/activate
+
 # Install dependencies
 pip install -r requirements.txt
+
 # Install app
 python setup.py develop
+
 # Run service
 python mock_drs/Server.py
 ```
@@ -106,7 +107,7 @@ python mock_drs/Server.py
 
 Note that only those parts of the service are implemented that are required for developing, testing 
 and debugging [TEStribute]. For all other endpoints only stubs are implemented that return 
-the most basic valid response (typically an empty JSON object).
+the most basic valid response (typically an "empty" JSON object).
 
 An important assumption that made during the deployment of this mock service is that the service
  assumes the consideration of the *object-id* field as a unique identifier across DRS instances. 
@@ -355,17 +356,17 @@ of the [Global Alliance for Genomics and Health] [organization].
 
 [2019 Google Summer of Code]: <https://summerofcode.withgoogle.com/projects/#6613336345542656>
 [Apache License 2.0]: <https://www.apache.org/licenses/LICENSE-2.0>
-[code of conduct]:CODE_OF_CONDUCT.md
-[Connexion]:https://github.com/zalando/connexion
+[code of conduct]: CODE_OF_CONDUCT.md
+[Connexion]: <https://github.com/zalando/connexion>
 [config]: mock_drs/config/app_config.yaml
 [config specifications]: mock_drs/specs/schema.data_repository_service.config_update.openapi.yaml
 [contributing guidelines]: CONTRIBUTING.md
-[Data Repository Service]:https://github.com/ga4gh/data-repository-service-schemas
-[DRS-cli]:https://github.com/elixir-europe/DRS-cli
-[modified DRS specification]:mock_drs/specs/schema.data_repository_service.cd0186f.openapi.modified.yam
-[extended DRS specification]:mock_drs/specs/schema.data_repository_service.cd0186f.openapi.modified.yam
+[Data Repository Service]: <https://github.com/ga4gh/data-repository-service-schemas>
+[DRS-cli]: <https://github.com/elixir-europe/DRS-cli>
+[modified DRS specification]: mock_drs/specs/schema.data_repository_service.cd0186f.openapi.modified.yam
+[extended DRS specification]: mock_drs/specs/schema.data_repository_service.cd0186f.openapi.modified.yam
 [Global Alliance for Genomics and Health]: <https://www.ga4gh.org/>
-[logo banner]:logos/logo-banner.svg
+[logo banner]: logos/logo-banner.svg
 [organization]: <https://summerofcode.withgoogle.com/organizations/6643588285333504/>
-[semantic versioning]:<https://semver.org/>
-[TEStribute]:https://github.com/elixir-europe/TEStribute
+[semantic versioning]: <https://semver.org/>
+[TEStribute]: <https://github.com/elixir-europe/TEStribute>
