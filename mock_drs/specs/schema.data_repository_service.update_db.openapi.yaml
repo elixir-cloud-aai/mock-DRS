@@ -18,17 +18,24 @@ paths:
         200:
           description: "200 response"
           schema:
-              $ref: '#/definitions/UpdateObjects'
+              $ref: '#/definitions/UpdatedDB'
       tags:
         - DataRepositoryService
       x-swagger-router-controller: ga4gh.drs.server
 definitions:
-  UpdateObjects:
+  UpdatedDB:
     type: object
     properties:
-      clear:
-        type: boolean
       objects:
         type: array
         items:
           type: string
+  UpdateObjects:
+    type: object
+    properties:
+      clear_db:
+        type: boolean
+      data_objects:
+        type: array
+        items:
+          $ref: '#/definitions/Object'
