@@ -151,29 +151,29 @@ useful for setting up environments for various testing scenarios for
 [TEStribute]. The endpoint is defined in a dedicated [OpenAPI] [specification]:
 
 ```yaml
-/update-db:
-post:
-  summary: Object id's in the array that need to be added to the db
-  operationId: UpdateDatabaseObjects
-  consumes:
-    - application/json
-  produces:
-    - application/json
-  parameters:
-    - name: body
-      in: body
-      description: ''
-      schema:
-        $ref: '#/definitions/UpdateObject'
-      required: true
-  responses:
-    200:
-      description: "200 response"
-      schema:
-          $ref: '#/definitions/UpdatedDB'
-  tags:
-    - DataRepositoryService
-  x-swagger-router-controller: ga4gh.drs.server
+    /update-db:
+    post:
+      summary: Object id's in the array that need to be added to the db
+      operationId: updateDatabaseObjects
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: ''
+          schema:
+            $ref: '#/definitions/UpdateObject'
+          required: true
+      responses:
+        200:
+          description: "200 response"
+          schema:
+              $ref: '#/definitions/UpdatedDB'
+      tags:
+        - DataRepositoryService
+      x-swagger-router-controller: ga4gh.drs.server
 ```
 
 It relies on the following models:

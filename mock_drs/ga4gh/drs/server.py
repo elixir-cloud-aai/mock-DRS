@@ -49,4 +49,5 @@ def GetAccessURL(object_id, access_id):
 
 def updateDatabaseObjects(body):
     current_objects = insert_objects(body["clear_db"], body["data_objects"])
-    return {200:"Successful Update", 'objects':current_objects}
+
+    return {'objects': current_objects}, 200
