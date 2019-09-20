@@ -9,8 +9,8 @@
     "mime_type": "application/json",
     "checksums": [
       {
-        "checksum": "",
-        "type": "None"
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -35,8 +35,8 @@
     "mime_type": "application/json",
     "checksums": [
       {
-        "checksum": "",
-        "type": "None"
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -61,8 +61,8 @@
     "mime_type": "",
     "checksums": [
       {
-        "checksum": "None",
-        "type": ""
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -87,8 +87,8 @@
     "mime_type": "",
     "checksums": [
       {
-        "checksum": "",
-        "type": ""
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -110,11 +110,11 @@
     "created": "2016-11-02T20:12:42-02:00",
     "updated": "2019-05-24T00:20:00-00:00",
     "version": "1",
-    "mime_type": "",
+    "mime_type": "18c2f5517e4ddc02cd57f6c7554b8e88",
     "checksums": [
       {
         "checksum": "None",
-        "type": ""
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -139,8 +139,8 @@
     "mime_type": "",
     "checksums": [
       {
-        "checksum": "",
-        "type": ""
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -165,8 +165,8 @@
     "mime_type": "",
     "checksums": [
       {
-        "checksum": "",
-        "type": ""
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -191,8 +191,8 @@
     "mime_type": "",
     "checksums": [
       {
-        "checksum": "",
-        "type": ""
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -217,8 +217,8 @@
     "mime_type": "",
     "checksums": [
       {
-        "checksum": "",
-        "type": ""
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
@@ -243,8 +243,8 @@
     "mime_type": "",
     "checksums": [
       {
-        "checksum": "",
-        "type": ""
+        "checksum": "18c2f5517e4ddc02cd57f6c7554b8e88",
+        "type": "md5"
       }
     ],
     "access_methods": [
