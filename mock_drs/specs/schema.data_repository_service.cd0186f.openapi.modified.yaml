@@ -163,6 +163,45 @@ paths:
       tags:
         - DataRepositoryService
       x-swagger-router-controller: ga4gh.drs.server
+  '/objects':
+    post:
+      summary: Post info about a data object
+      description: "Posts object metadata, and a list of access methods that can be used to fetch object bytes."
+      operationId: PostObject
+      responses:
+        '200':
+          description: The access URL was found successfully.
+          schema:
+            $ref: '#/definitions/AccessURL'
+        '400':
+          description: The request is malformed.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: The request is unauthorized.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: The requested access URL wasn't found
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: The requester is not authorized to perform this action.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: An unexpected error occurred.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+        - in: body
+          name: Object
+          description: The DrsObject info
+          schema:
+              $ref: '#/definitions/Object'
+      tags:
+        - DataRepositoryService
+      x-swagger-router-controller: ga4gh.drs.server
 securityDefinitions:
   authToken:
     description: |
@@ -332,7 +371,8 @@ definitions:
           accession numbers or external GUIDs.
   AccessURL:
     type: object
-    required: ['url']
+    # required:
+      # - url
     properties:
       url:
         type: string
@@ -350,6 +390,7 @@ definitions:
     type: object
     required:
       - type
+      - access_url
     properties:
       type:
         type: string

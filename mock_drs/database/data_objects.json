@@ -21,7 +21,18 @@
           "headers": [
            "None"
           ]
-        }
+        },
+        "access_id": "001"
+      },
+      {
+        "type": "s3",
+        "access_url": {
+          "url": "s3://s3.ensembl.org/pub/release-81/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna_sm.toplevel.fa.gz",
+          "headers":  [
+            "None"
+          ]
+        },
+        "access_id": "002"
       }
     ]
   },
@@ -47,7 +58,8 @@
           "headers": [
             "None"
           ]
-        }
+        },
+        "access_id": "002"
       }
     ]
   },
@@ -73,7 +85,8 @@
           "headers": [
             "None"
           ]
-        }
+        },
+        "access_id": "003"
       }
     ]
   },
@@ -99,7 +112,8 @@
           "headers":  [
             "None"
           ]
-        }
+        },
+        "access_id": "004"
       }
     ]
   },
@@ -125,7 +139,8 @@
           "headers": [
             "None"
           ]
-        }
+        },
+        "access_id": "005"
       }
     ]
   },
@@ -151,7 +166,8 @@
           "headers":  [
             "None"
           ]
-        }
+        },
+        "access_id": "006"
       }
     ]
   },
@@ -177,7 +193,8 @@
           "headers": [
             "None"
           ]
-        }
+        },
+        "access_id": "007"
       }
     ]
   },
@@ -203,7 +220,8 @@
           "headers":  [
             "None"
           ]
-        }
+        },
+        "access_id": "008"
       }
     ]
   },
@@ -229,7 +247,8 @@
           "headers":  [
             "None"
           ]
-        }
+        },
+        "access_id": "009"
       }
     ]
   },
@@ -255,7 +274,8 @@
           "headers":  [
             "None"
           ]
-        }
+        },
+        "access_id": "010"
       }
     ]
   }
