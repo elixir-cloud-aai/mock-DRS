@@ -39,7 +39,11 @@ def GetObject(object_id: string):
 
 def PostObject():
     database = create_mongo_client(app=current_app, config=current_app.config)
-    database.db.data_objects.insert(request.json)
+    objects = request.json
+    print("input: ", objects)
+    for obj in objects:
+        database.db.data_objects.insert(obj)
+        print("obj: ", obj)
     return request.json
 
 

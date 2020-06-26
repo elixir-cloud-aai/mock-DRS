@@ -198,7 +198,7 @@ paths:
           name: Object
           description: The DrsObject info
           schema:
-              $ref: '#/definitions/Object'
+              $ref: '#/definitions/ObjectList'
       tags:
         - DataRepositoryService
       x-swagger-router-controller: ga4gh.drs.server
@@ -305,6 +305,10 @@ definitions:
           The list of Data Objects and Data Bundles contained by this Data Bundle.
         items:
           $ref: '#/definitions/BundleObject'
+  ObjectList:
+    type: array
+    items:
+      $ref: '#/definitions/Object'
   Object:
     type: object
     required: ['id', 'size', 'created', 'checksums', 'access_methods']
