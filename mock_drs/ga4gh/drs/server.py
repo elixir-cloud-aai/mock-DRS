@@ -47,6 +47,17 @@ def PostObject():
     return request.json
 
 
+def UpdateObject(object_id):
+    database = create_mongo_client(app=current_app, config=current_app.config)
+    obj = request.json
+    db_obj = database.db.data_objects.find_one({"id": object_id})
+    if db_obj is None:
+        return obj, 404
+    else:
+        database.db.data_objects.update({"id": object_id}, obj)
+        return obj, 200
+
+
 def GetAccessURL(object_id, access_id):
 
     # create a client for the database
