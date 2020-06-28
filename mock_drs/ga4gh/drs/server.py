@@ -58,8 +58,17 @@ def UpdateObject(object_id):
         return obj, 200
 
 
-def GetAccessURL(object_id, access_id):
+def DeleteObject(object_id):
+    database = create_mongo_client(app=current_app, config=current_app.config)
+    obj = database.db.data_objects.find_one({"id": object_id})
+    if obj is None:
+        return obj, 404
+    else:
+        database.db.data_objects.remove({"id": object_id})
+        return obj, 200
 
+
+def GetAccessURL(object_id, access_id):
     # create a client for the database
     mongo = create_mongo_client(app=current_app, config=current_app.config)
 

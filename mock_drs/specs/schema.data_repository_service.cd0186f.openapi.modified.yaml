@@ -159,6 +159,45 @@ paths:
       tags:
         - DataRepositoryService
       x-swagger-router-controller: ga4gh.drs.server
+    delete:
+      summary: Deletes the existing DRS Object
+      description: >-
+        Deletes the existing DRS endpoint
+      operationId: DeleteObject
+      responses:
+        '200':
+          description: The Data Object was deleted successfully.
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: The request is malformed.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: The request is unauthorized.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: The requester is not authorized to perform this action.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: The requested Data Object wasn't found
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: An unexpected error occurred.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+        - name: object_id
+          in: path
+          required: true
+          type: string
+          description: An `id` of a Data Object
+      tags:
+        - DataRepositoryService
+      x-swagger-router-controller: ga4gh.drs.server
 
   '/objects/{object_id}/access/{access_id}':
     get:
