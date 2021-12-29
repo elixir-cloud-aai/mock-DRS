@@ -4,7 +4,7 @@ certifi==2019.6.16
 chardet==3.0.4
 connexion==1.4.2
 Flask==1.1.0
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 Flask-PyMongo==2.3.0
 inflection==0.3.1
 itsdangerous==1.1.0
@@ -12,8 +12,8 @@ jsonschema==3.0.1
 MarkupSafe==1.1.1
 pymongo==3.8.0
 pyrsistent==0.15.2
-PyYAML==5.1.1
 requests>=2.22.0
+PyYAML==5.4
 spec-synthase==0.1.11
 swagger-spec-validator==2.4.3
 urllib3==1.26.5
