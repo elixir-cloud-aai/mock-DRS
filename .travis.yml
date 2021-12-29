@@ -1,0 +1,10 @@
+language: python
+
+services:
+  - docker
+
+script:
+  - docker-compose up -d --build
+  - docker ps
+  - sleep 30
+  - curl http://localhost:9101/ga4gh/drs/v1/swagger.json
