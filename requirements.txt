@@ -3,7 +3,7 @@ attrs==19.1.0
 certifi==2022.12.7
 chardet==3.0.4
 connexion==1.4.2
-Flask==1.1.0
+Flask==2.3.2
 Flask-Cors==3.0.9
 Flask-PyMongo==2.3.0
 inflection==0.3.1
