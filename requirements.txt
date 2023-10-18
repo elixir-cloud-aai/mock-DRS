@@ -16,7 +16,7 @@ requests>=2.22.0
 PyYAML==5.4
 spec-synthase==0.1.11
 swagger-spec-validator==2.4.3
-urllib3==1.26.5
+urllib3==1.26.18
 virtualenv==16.6.1
 Werkzeug==2.2.3
 
