@@ -18,5 +18,5 @@ spec-synthase==0.1.11
 swagger-spec-validator==2.4.3
 urllib3==1.26.5
 virtualenv==16.6.1
-Werkzeug==2.2.3
+Werkzeug==3.0.1
 
